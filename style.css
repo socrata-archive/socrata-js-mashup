@@ -1,0 +1,29 @@
+h4 {
+    margin: 1em 0 0 0;
+}
+
+#container {
+    width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#datasetForm #details {
+    display: none;
+}
+
+#datasetForm div.line {
+    margin-top: 0.5em;
+}
+
+#datasetForm label {
+    text-align: right;
+    width: 8em;
+    float: left;
+    margin-right: 0.5em;
+}
+
+#datasetForm input[type=text] {
+    width: 18em;
+    
+}

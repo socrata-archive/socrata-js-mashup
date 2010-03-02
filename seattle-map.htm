@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Socrata Javascript/XHR Example</title>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="socrata.js"></script>
+    <script type="text/javascript" src="map.js"></script>
+</head>
+
+<body>
+    <div id="container">
+    <h1>Map Data from Socrata</h1>
+    <form id="datasetForm">
+        
+        <h4>Dataset Location</h4>
+        <div class='line'>
+            <label for="location">URL:</label>
+            <input id="location" type="text" value="http://data.seattle.gov/government/Viewpoints/5bsb-yqra" />
+        </div>
+        
+        <div id="details">
+        <h4>Dataset </h4>
+        <div class='line'>
+            <label for="lat">Latitude:</label>
+            <input id="lat" type="text" />
+        </div>
+        
+        <div class='line'>
+        <label for="long">Longitude:</label>
+            <input id="long" type="text" />
+        </div>
+        <div>
+        
+        <input type="submit" value="Map Data">
+    </form>
+    </div>
+</body>
+</html>
+
