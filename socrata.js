@@ -24,7 +24,6 @@ Dataset.prototype.extractHost = function(url) {
 };
 
 Dataset.prototype.columnsCallback = function(data) {
-    console.log(data);
     this.columns = data;
 };
 

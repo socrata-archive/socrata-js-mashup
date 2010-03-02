@@ -17,7 +17,24 @@ $( function() {
         dataset.extractHost(datasetLocation);
         
         // Get an array of columns
-        console.log(dataset.columnsURL());
-        $.getJSON(dataset.columnsURL(), dataset.columnsCallback);
+        $.getJSON(dataset.columnsURL(), function(data, textstatus) {
+            dataset.columnsCallback(data);
+            
+            annotation = $("#datasetForm #annotation")[0];
+            lat = $("#datasetForm #lat");
+            lon = $("#datasetForm #long");
+            
+            // Construct select lists
+            $.each(dataset.columns, function(i, column) {
+                if ( column.flags == null || $.inArray("hidden", column.flags) == -1 ) {
+                    console.log(column.flags);
+                    option = new Option(column.name, column.id);
+                    annotation.add(option,null);
+                }
+            });
+            // Show user interface
+            $("#datasetForm #details").show('fast');
+        });
     });
+    
 });
