@@ -86,10 +86,9 @@ $( function() {
                 }
                 marker = new google.maps.Marker(markerData);
             });
-            
-            
+
         });
-        
+
         $("#map_canvas").show('fast');
     });
     
