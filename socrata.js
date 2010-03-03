@@ -27,6 +27,10 @@ Dataset.prototype.columnsCallback = function(data) {
     this.columns = data;
 };
 
+Dataset.prototype.rowsCallback = function(data) {
+    this.rows = data.data;
+}
+
 // Ready a string for use in JSONP callback
 Dataset.prototype.jsonWrap = function(url) {
     return this.host + url + 

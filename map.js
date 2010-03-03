@@ -7,7 +7,7 @@ function addOption(select, option) {
 }
 
 function columnToSelect(column) {
-    return new Option(column.name, column.id);
+    return new Option(column.name, column.position);
 }
 
 $( function() {
@@ -22,13 +22,12 @@ $( function() {
         // Look for a UID and host name
         dataset.extractUID(datasetLocation);
         dataset.extractHost(datasetLocation);
-        
+
         // Get an array of columns
         $.getJSON(dataset.columnsURL(), function(data, textstatus) {
             dataset.columnsCallback(data);
             
             allColumns = $("#datasetForm #allColumns:checked").val() != null;
-            console.log(allColumns)
             annotation = $("#columnForm #annotation")[0];
             lat = $("#columnForm #lat")[0];
             lon = $("#columnForm #long")[0];
@@ -59,5 +58,42 @@ $( function() {
         });
     });
     
+    $("#columnForm").submit( function(e) {
+        e.preventDefault();
+        latID = parseInt($("#columnForm #lat").val()) + 6;
+        longID = parseInt($("#columnForm #long").val()) + 6;
+        annotationID = parseInt($("#columnForm #annotation").val()) + 6;
+        annotations = annotationID != 6 ? true : false;
+        
+        $.getJSON(dataset.rowsURL(), function(data, textstatus) {
+            dataset.rowsCallback(data);
+            
+            map = new google.maps.Map(document.getElementById("map_canvas"), {
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                zoom: 8
+            });
+            
+            $.each(dataset.rows, function(i, row) {
+                // console.log("Lat: " + row[latID] + " long: " + row[longID]);
+                latLong = new google.maps.LatLng(row[latID], row[longID]);
+                markerData = {
+                    map: map,
+                    position: latLong
+                };
+                console.log('Lat: ' + row[latID] + ' long: ' + row[longID]);
+                if ( annotations ) {
+                    markerData.title = row[annotationID];
+                }
+                if ( i == 0 ) {
+                    map.setCenter(latLong);
+                    marker = new google.maps.Marker(markerData);
+                }
+            });
+            
+            
+        });
+        
+        $("#map_canvas").show('fast');
+    });
     
 });

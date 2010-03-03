@@ -24,6 +24,11 @@ h4 {
 }
 
 #container input[type=text] {
-    width: 30em;
-    
+    width: 30em;   
+}
+
+#map_canvas {
+    display: none;
+    width: 35em;
+    height: 35em;
 }
