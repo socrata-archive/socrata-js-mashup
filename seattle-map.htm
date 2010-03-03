@@ -23,13 +23,21 @@
             <input id="location" type="text" value="http://data.seattle.gov/government/Viewpoints/5bsb-yqra" />
         </div>
         
-        <div id="details">
+        <div class='line'>
+            <label for="allColumns">Use all columns</label>
+            <input id="allColumns" type="checkbox" />
+        </div>
+        
+        <input type="submit" value="Grab Columns" />
+    </form>
+    
+    <form id="columnForm">
         <h4>Column Alignments</h4>
         
         <div class='line'>
             <label for="annotation">Annotation:</label>
             <select id="annotation">
-                <option value="none"></option>
+                <option value="0"></option>
             </select>
         </div>
         
@@ -42,11 +50,8 @@
         <label for="long">Longitude:</label>
             <select id="long"></select>
         </div>
-        
-        
-        <div>
-        
-        <input type="submit" value="Map Data">
+
+        <input type="submit" value="Map Data" />
     </form>
     </div>
 </body>

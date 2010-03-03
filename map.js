@@ -1,12 +1,19 @@
+function addOption(select, option) {
+    if ( $.browser.msie ) {
+        select.add(option);
+    } else {
+        select.add(option, null);
+    }
+}
+
+function columnToSelect(column) {
+    return new Option(column.name, column.id);
+}
+
 $( function() {
-    $.ajaxSetup({"error":function(XMLHttpRequest,textStatus, errorThrown) {   
-        alert(textStatus);
-        alert(errorThrown);
-        alert(XMLHttpRequest.responseText);
-    }});
-    
-    
+    // Contains relevant information about the Socrata dataset
     var dataset = new Dataset();
+    
     $("#datasetForm").submit( function(e) {
         // Don't actually submit the form
         e.preventDefault();
@@ -20,21 +27,37 @@ $( function() {
         $.getJSON(dataset.columnsURL(), function(data, textstatus) {
             dataset.columnsCallback(data);
             
-            annotation = $("#datasetForm #annotation")[0];
-            lat = $("#datasetForm #lat");
-            lon = $("#datasetForm #long");
+            allColumns = $("#datasetForm #allColumns:checked").val() != null;
+            console.log(allColumns)
+            annotation = $("#columnForm #annotation")[0];
+            lat = $("#columnForm #lat")[0];
+            lon = $("#columnForm #long")[0];
             
             // Construct select lists
             $.each(dataset.columns, function(i, column) {
+                // Only look at non-hidden columns for lat/long data
                 if ( column.flags == null || $.inArray("hidden", column.flags) == -1 ) {
-                    console.log(column.flags);
-                    option = new Option(column.name, column.id);
-                    annotation.add(option,null);
+                    addOption(annotation,  columnToSelect(column));
+                    
+                    // Make all possible columns available for lat/long, 
+                    // otherwise try to be smart
+                    if ( allColumns ) {
+                        addOption(lat, columnToSelect(column));
+                        addOption(lon, columnToSelect(column));
+                    } else {
+                        s = column.name.toLowerCase();
+                        if ( s == "x" || s.indexOf('lat') >= 0 ) {
+                            addOption(lat, columnToSelect(column));
+                        } else if ( s == "y" || s.indexOf('long') >= 0 ) {
+                            addOption(lon, columnToSelect(column));
+                        }
+                    }
                 }
             });
             // Show user interface
-            $("#datasetForm #details").show('fast');
+            $("#columnForm").show('fast');
         });
     });
+    
     
 });

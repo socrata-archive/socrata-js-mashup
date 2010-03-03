@@ -8,22 +8,22 @@ h4 {
     margin-right: auto;
 }
 
-#datasetForm #details {
+#columnForm {
     display: none;
 }
 
-#datasetForm div.line {
+#container div.line {
     margin-top: 0.5em;
 }
 
-#datasetForm label {
+#container label {
     text-align: right;
     width: 8em;
     float: left;
     margin-right: 0.5em;
 }
 
-#datasetForm input[type=text] {
+#container input[type=text] {
     width: 30em;
     
 }
