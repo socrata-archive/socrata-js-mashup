@@ -45,10 +45,10 @@ $( function() {
                         addOption(lon, columnToSelect(column));
                     } else {
                         s = column.name.toLowerCase();
-                        if ( s == "x" || s.indexOf('lat') >= 0 ) {
-                            addOption(lat, columnToSelect(column));
-                        } else if ( s == "y" || s.indexOf('long') >= 0 ) {
+                        if ( s == "x" || s.indexOf('long') >= 0 ) {
                             addOption(lon, columnToSelect(column));
+                        } else if ( s == "y" || s.indexOf('lat') >= 0 ) {
+                            addOption(lat, columnToSelect(column));
                         }
                     }
                 }
@@ -74,20 +74,20 @@ $( function() {
             });
             
             $.each(dataset.rows, function(i, row) {
-                // console.log("Lat: " + row[latID] + " long: " + row[longID]);
+                
                 latLong = new google.maps.LatLng(row[latID], row[longID]);
                 markerData = {
                     map: map,
                     position: latLong
                 };
-                console.log('Lat: ' + row[latID] + ' long: ' + row[longID]);
+                
                 if ( annotations ) {
-                    markerData.title = row[annotationID];
+                    markerData['title'] = row[annotationID];
                 }
                 if ( i == 0 ) {
                     map.setCenter(latLong);
-                    marker = new google.maps.Marker(markerData);
                 }
+                marker = new google.maps.Marker(markerData);
             });
             
             
