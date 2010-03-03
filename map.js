@@ -70,7 +70,7 @@ $( function() {
             
             map = new google.maps.Map(document.getElementById("map_canvas"), {
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
-                zoom: 8
+                zoom: 10
             });
             
             $.each(dataset.rows, function(i, row) {
@@ -78,12 +78,9 @@ $( function() {
                 latLong = new google.maps.LatLng(row[latID], row[longID]);
                 markerData = {
                     map: map,
-                    position: latLong
+                    position: latLong,
+                    title: annotations ? row[annotationID] : ''
                 };
-                
-                if ( annotations ) {
-                    markerData['title'] = row[annotationID];
-                }
                 if ( i == 0 ) {
                     map.setCenter(latLong);
                 }

@@ -29,6 +29,7 @@ h4 {
 
 #map_canvas {
     display: none;
+    margin-top: 2em;
     width: 35em;
     height: 35em;
 }
